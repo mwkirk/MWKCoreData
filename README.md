@@ -21,7 +21,7 @@ If you're looking to completely forget that you're using Core Data, this isn't t
 
 It doesn't try to cover the entire Core Data framework or more exotic usage patterns, but it's sufficient for most use cases and easy to extend.
 
-##Credit Where It's Due
+## Credit Where It's Due
 
 Key parts of this library are taken from two sources:
 
@@ -29,7 +29,7 @@ Key parts of this library are taken from two sources:
 
 * The progressive migration code is based on the excellent article [Custom Core Data Migrations](https://www.objc.io/issues/4-core-data/core-data-migration/) by Martin Hwasser in [ObjC.io](https://www.objc.io) Issue #4 and its accompanying [example](https://github.com/objcio/issue-4-core-data-migration). If you want to wrap your head around Core Data migrations, this is the place to start.
  
-##Organization
+## Organization
 
 MWKCoreData is comprised of two classes and two categories.
 
@@ -38,9 +38,9 @@ MWKCoreData is comprised of two classes and two categories.
 * `NSManagedObject+MWKCoreData` provides [Objective Record's](https://github.com/supermarin/ObjectiveRecord) query syntax and an `-[awakeFromCreate]` method which can be overridden in your `NSManagedObject` subclass to work around the difficulties of `-[awakeFromInsert]` when used with nested (i.e. parent/child) contexts. See the note in the header.
 * `NSManagedObjectContext+MWKCoreData` provides convenience methods for creating and saving contexts (including a conditional save useful for child contexts that first obtains permanent object IDs), convenience methods for setting up and sychronizing nested contexts via notification observation + merge/refresh. 
 
-##Usage
+## Usage
 
-###Core Data Migration and Stack Setup
+### Core Data Migration and Stack Setup
 
 Somewhere early in your application's setup, you should check if a migration is required and perform it if needed. On iOS, you shouldn't migrate within `-[application:didFinishLaunchingWithOptions:]`; the watchdog will kill your app mid-migration if it's taking too long. Typically, you should present a UI which informs the user about the migration and posts updates via the progress block. 
 
@@ -85,7 +85,7 @@ else {
 }
 ```
 
-###Managed Object Contexts
+### Managed Object Contexts
 You spend a lot of time in Core Data with managed object contexts, so streamlining common operations is a big win. Observing another context also enables its saves or changes to be automatically merged into the receiver. There's no magic here; just convenient ways to employ some useful Core Data patterns and a little help in avoiding some pitfalls.
 
 ```objective-c
@@ -108,7 +108,7 @@ NSArray *tmpIdObjects = [[childOfDefaultCtx objectsWithTemporaryIDs] allObjects]
 [childOfDefaultCtx stopObservingObjectChangesInParentContext];
 ```
 
-###Managed Objects
+### Managed Objects
 
 Compare [Objective Record's](https://github.com/supermarin/ObjectiveRecord) query syntax:
 ```objective-c
@@ -127,7 +127,7 @@ NSArray *persons = [yourManagedObjectCtx executeFetchRequest:request error:&erro
 ```
 You'll improve your code's readability enormously. The more complex your queries (ordering, limits, etc.), the better it gets.
 
-##Installation
+## Installation
 ###CocoaPods
 You can install MWKCoreData in your project with [CocoaPods](https://github.com/cocoapods/cocoapods) by adding this to your `Podfile`:
 
@@ -135,14 +135,14 @@ You can install MWKCoreData in your project with [CocoaPods](https://github.com/
 pod 'MWKCoreData', '~> 1.0.0'
 ```
 
-###Carthage
+### Carthage
 MWKCoreData also supports [Carthage](https://github.com/Carthage/Carthage). Specify it in your `Cartfile` like this:
 
 ```
 github "mwkirk/MWKCoreData" ~> 1.0
 ```
 
-###Manually
+### Manually
 Since MWKCoreData is just a few files, it's also simple to integrate it into your project manually.
 
 ## Requirements
@@ -151,7 +151,7 @@ MWKCoreData requires iOS 8.0 or higher.
 
 It _should_ work on all Apple platforms that support Core Data, but it is untested.
 
-##About
+## About
 
 This library has grown and evolved based purely on what I've needed; it doesn't doesn't cover the Core Data gamut. However, it's such a simple library that you can probably add the additional bits you need quite easily – and perhaps send a pull request if you think it's something others could use or you find a bug!
 
@@ -159,7 +159,7 @@ I've tried several Core Data libraries, but nothing ever quite satisfied. Some w
 
 However, in some cases, I've cherry-picked others' code because it was so excellent. With [Objective Record](https://github.com/supermarin/ObjectiveRecord), the query syntax was exactly what I wanted, but the rest of the library wasn't a good fit (and I didn't feel like my code would be a good contribution to that project either). Apologies to [Supermarin](http://supermar.in/). I guess that's how forks happen.
 
-##License
+## License
 
 MWKCoreData is available under the MIT license. See the LICENSE file for more info.
 
