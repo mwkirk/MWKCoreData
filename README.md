@@ -128,7 +128,7 @@ NSArray *persons = [yourManagedObjectCtx executeFetchRequest:request error:&erro
 You'll improve your code's readability enormously. The more complex your queries (ordering, limits, etc.), the better it gets.
 
 ## Installation
-###CocoaPods
+### CocoaPods
 You can install MWKCoreData in your project with [CocoaPods](https://github.com/cocoapods/cocoapods) by adding this to your `Podfile`:
 
 ```Ruby
